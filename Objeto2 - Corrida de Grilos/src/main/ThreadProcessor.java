@@ -12,7 +12,11 @@ public class ThreadProcessor extends Thread {
 	int minPulo = 10;
 	int pulo;
 	
-	public ThreadProcessor (String tGrilo, int tDist, boolean tgriloB, int tnPulos, int tdistTotal) {
+	String time;
+	RankingManager rankManager;
+	
+	public ThreadProcessor (String tGrilo, int tDist, boolean tgriloB, int tnPulos, int tdistTotal, String tTime, 
+			RankingManager tRank) {
 		
 		grilo = tGrilo;
 		griloB = tgriloB;
@@ -20,7 +24,9 @@ public class ThreadProcessor extends Thread {
 		distTotal = tdistTotal;
 		nPulos = tnPulos;
 		
-		
+		time = tTime;
+		rankManager = tRank;
+	
 	}
 	
 	@Override
@@ -39,7 +45,9 @@ public class ThreadProcessor extends Thread {
 			if (dist >= distTotal) {
 				griloB = true;
 				
-				System.out.println ("O " + grilo + " alcançou a linha de chegada com um total de " + nPulos + " pulos.");
+				rankManager.Ranking(grilo, dist, time, nPulos);
+				
+				//System.out.println ("O " + grilo + " alcançou a linha de chegada com um total de " + nPulos + " pulos.");
 			}
 			
 			

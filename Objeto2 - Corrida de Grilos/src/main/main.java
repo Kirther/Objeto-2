@@ -13,12 +13,26 @@ public class main {
 		
 		int totalDist = 300;
 		int[] gDist;
+
+		String[] times;
+		RankingManager ranking = new RankingManager();
 		
 		nGrilos = (int) (Math.random() * ((maxGrilos - minGrilos) + 1) + minGrilos);
+		
+		if (nGrilos % 2 == 0)
+		{
+			//não precisa acontecer nada
+		}
+		else
+		{
+			nGrilos++;
+		}
+		
 		grilos = new String[nGrilos];
 		gDist = new int[nGrilos];
 		bGrilos = new boolean[nGrilos];
 		nPulos = new int[nGrilos];
+		times = new String[nGrilos];
 		
 		//Gerando todos os grilos, e iniciando seus valores de iniciais de movimento e bool de chegada
 		for (int i = 0; i < grilos.length; i++)
@@ -27,6 +41,11 @@ public class main {
 			gDist[i] = 0;
 			nPulos[i] = 0;
 			bGrilos[i] = false;
+			
+			if (i % 2 ==0)
+				times[i] = "Time 1";
+				else
+					times[i] = "Time 2";
 			
 			//System.out.println("O " + grilos[i] + " já andou " + gDist[i] + "cm, e seu valor para chegada é: " + bGrilos[i]);
 		}
@@ -38,7 +57,7 @@ public class main {
 		
 		for (int i = 0; i < nGrilos; i++)
 		{
-			threads[i] = new ThreadProcessor(grilos[i], gDist[i], bGrilos[i], nPulos[i], totalDist);
+			threads[i] = new ThreadProcessor(grilos[i], gDist[i], bGrilos[i], nPulos[i], totalDist, times[i], ranking);
 			threads[i].start();
 		}
 		
@@ -51,8 +70,9 @@ public class main {
 				e.printStackTrace();
 			}
 		}
+		ranking.TeamRanking();
 		
-		System.out.println("Fim da Corrida");
+		//System.out.println("Fim da Corrida");
 
 	}
 }
