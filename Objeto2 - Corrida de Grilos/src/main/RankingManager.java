@@ -1,5 +1,7 @@
 package main;
 
+import java.util.concurrent.Semaphore;
+
 public class RankingManager {
 	
 	String firstTime;
@@ -11,8 +13,18 @@ public class RankingManager {
 	int distTime2 = 0;
 	int pulosTime2 = 0;
 	
+	Semaphore semaforo = new Semaphore(1);
+	
 	public void Ranking (String grilo, int dist, String time, int nPulos)
 	{
+		
+		try {
+			semaforo.acquire();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		if (firstTime == null)
 		{
 			firstTime = time;
@@ -32,6 +44,8 @@ public class RankingManager {
 			distTime2 += dist;
 			pulosTime2 += nPulos;
 		}
+		
+		semaforo.release();
 	}
 	
 	public void TeamRanking()
