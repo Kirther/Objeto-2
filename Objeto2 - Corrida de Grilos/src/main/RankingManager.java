@@ -32,8 +32,6 @@ public class RankingManager {
 		
 		rank++;
 		
-		System.out.println("O " + grilo + " foi o " + rank + "º colocado com " + nPulos + " pulos.");
-		
 		if (time == "Time 1")
 		{
 			distTime1 += dist;
@@ -46,6 +44,8 @@ public class RankingManager {
 		}
 		
 		semaforo.release();
+		
+		System.out.println("O " + grilo + " foi o " + rank + "º colocado com " + nPulos + " pulos.");
 	}
 	
 	public void TeamRanking()
